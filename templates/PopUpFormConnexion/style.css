@@ -1,0 +1,149 @@
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900display=swap%27);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+.userup_section {
+  position: relative;
+  min-height: 100vh;
+  background: rgb(83, 22, 22);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.userup_section .container {
+  position: relative;
+  width: 800px;
+  height: 500px;
+  background: rgb(83, 22, 22);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.userup_section .container .user {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.userup_section .container .user .imgBox {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  background: rgba(253, 191, 21, 0.836);
+  transition: 0.5s;
+}
+.userup_section .container .user .imgBox img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.userup_section .container .user .formBox {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  background: rgba(253, 191, 21, 0.836);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  transition: 0.5s;
+}
+.userup_section .container .user .formBox form h2 {
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 10px;
+  color: rgb(83, 22, 22);
+}
+.userup_section .container .user .formBox form input {
+  position: relative;
+  width: 100%;
+  padding: 10px;
+  background: whitesmoke;
+  color: black;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  margin: 8px 0;
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: 300;
+}
+.userup_section .container .user .formBox form input[type="submit"] {
+  max-width: 100px;
+  background: rgb(83, 22, 22);
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: 0.5s;
+}
+.userup_section .container .user .formBox form .signup {
+  position: relative;
+  margin-top: 20px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: rgb(83, 22, 22);
+  text-transform: uppercase;
+  font-weight: 300;
+}
+.userup_section .container .user .formBox form .signup a {
+  font-weight: 600;
+  text-decoration: none;
+  color: rgb(83, 22, 22);
+}
+.userup_section .container .signupBox {
+  pointer-events: none;
+}
+.userup_section .container.active .signupBox {
+  pointer-events: initial;
+}
+
+.userup_section .container .signupBox .formBox {
+  left: 100%;
+}
+.userup_section .container.active .signupBox .formBox {
+  left: 0;
+}
+.userup_section .container .signupBox .imgBox {
+  left: -100%;
+}
+.userup_section .container.active .signupBox .imgBox {
+  left: 0;
+}
+
+.userup_section .container .signInBox .formBox {
+  left: 0;
+}
+.userup_section .container.active .signInBox .formBox {
+  left: 100%;
+}
+.userup_section .container .signInBoxx .imgBox {
+  left: 0;
+}
+.userup_section .container.active .signInBox .imgBox {
+  left: -100%;
+}
+@media (max-width: 991px) {
+  .userup_section .container {
+    max-width: 400px;
+  }
+  .userup_section .container .imgBox {
+    display: none;
+  }
+  .userup_section .container .user .formBox {
+    width: 100%;
+  }
+}

@@ -22,18 +22,17 @@
 
 <div class="container">
 
-    <p>Balises IMG, SRC dans <b>HTML.TWIG</b> :</p>
+    <!-- <p>Balises IMG, SRC dans <b>HTML.TWIG</b> :</p>
     <div class="d-flex flex-row">
         <div class="d-flex flex-column col-6">        
             <label for="">... fichier image dans ASSETS...</label>
-            <img class="TestImg1" src="{{ asset('../assets/img/bckgrd_portfolio_birolini_herve.png') }}" alt="">
+            <img class="TestImg1" src="{#{{ asset('../assets/img/bckgrd_portfolio_birolini_herve.png') }}#}" alt="">
         </div>
         <div class="d-flex flex-column col-6">        
             <label for="">... fichier image dans BUILD...</label>
-            <img class="TestImg2" src="{{ asset('build/images/bckgrd_portfolio_birolini_herve.png') }}" alt="">
+            <img class="TestImg2" src="{#{{ asset('build/images/bckgrd_portfolio_birolini_herve.png') }}#}" alt="">
         </div>
     </div>
-    
     <br><br>
     <p>Balises DIV, background dans <b>CSS</b> :</p>
     <div class="d-flex flex-row">
@@ -43,10 +42,9 @@
         </div>
         <div class="d-flex flex-column col-6">        
             <label for="">... fichier image dans BUILD...</label>
-            <div id="TestImg2" style="background-image: url({{ asset('build/images/bckgrd_portfolio_birolini_herve.png')}})"></div>
+            <div id="TestImg2" style="background-image: url({#{{ asset('build/images/bckgrd_portfolio_birolini_herve.png')}}#})"></div>
         </div>
-    </div>
-
+    </div> -->
 </div>
 
 {% endblock %}

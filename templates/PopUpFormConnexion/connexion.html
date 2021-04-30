@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section class="userup_section">
+      <div class="container">
+        <div class="user signInBox">
+          <div class="imgBox"><img src="images/vin.jpg" /></div>
+          <div class="formBox">
+            <form>
+              <h2>S'identifier</h2>
+              <input type="text" name="" placeholder="Nom d'utilisateur" />
+              <input type="password" name="" placeholder="Mot de Passe" />
+              <input type="Submit" name="" placeholder="Se Connecter" />
+              <p class="signup">
+                Pas de Compte?
+                <a href="#" onclick="toggleForm();">S'inscrire</a>
+              </p>
+            </form>
+          </div>
+        </div>
+        <div class="user signupBox">
+          <div class="formBox">
+            <form>
+              <h2>Créer un Compte</h2>
+              <input type="text" name="" placeholder="Nom d'utilisateur" />
+              <input type="email" name="" placeholder="Adresse Email" />
+              <input type="password" name="" placeholder="Créer Mot de Passe" />
+              <input type="password"name=""placeholder="Confirmer Mot de Passe"/>
+              <input type="Submit" name="" placeholder="S'inscrire" />
+              <p class="signup">Vous avez déjà un compte?
+                <a href="#" onclick="toggleForm();">Se connecter</a>
+              </p>
+            </form>
+          </div>
+          <div class="imgBox"><img src="images/vinfrmg.jpg" /></div>
+        </div>
+      </div>
+    </section class="userup_section">
+    <script text="text/javascript">
+      function toggleForm() {
+        var container = document.querySelector(".container");
+        container.classList.toggle("active");
+      }
+    </script>
+  </body>
+</html>

@@ -4,10 +4,11 @@ namespace App\DataFixtures;
 
 use App\Entity\Article;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class ArticleFixture extends Fixture
-{
+class ArticleFixtures extends Fixture implements OrderedFixtureInterface{
+
     const ARTICLES = [
         ['Title'        => "Foie gras d'oie",
         'Description'   => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam esse quae quod blanditiis modi? Quibusdam eius sed, veniam exercitationem molestias aperiam neque atque vel aliquam obcaecati in necessitatibus eos reiciendis.",
@@ -140,7 +141,7 @@ class ArticleFixture extends Fixture
             $obArticle->setCapacity($Article['Capacity']);
             $obArticle->setPrice($Article['Price']);
             $obArticle->setScore($Article['Score']);
-            $obArticle->setCategory($Article['Category']);
+            // $obArticle->setCategory($Article['Category']);
             $obArticle->setImage($Article['Image']);
             // $article->setTitle("Titre " . $count);
             // $article->setUri("Uri Fixture" . $count);
@@ -148,5 +149,15 @@ class ArticleFixture extends Fixture
         }
         //
         $manager->flush();
+    }
+
+
+    /**
+     * Get the order of this fixture
+     *
+     * @return integer
+     */
+    public function getOrder(): int{
+        return 3;
     }
 }

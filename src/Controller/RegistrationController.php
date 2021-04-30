@@ -15,11 +15,19 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 class RegistrationController extends AbstractController
 {
     /**
-     * @Route("/register", name="app_register")
+     * Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
+    public function register(Request $request
+                            , UserPasswordEncoderInterface $passwordEncoder
+                            , GuardAuthenticatorHandler $guardHandler
+                            , LoginFormAuthenticator $authenticator
+                            ): Response
     {
         $user = new User();
+
+        // birolini, ajouter pour renseigner le champs sans afficher sur la form
+        $user->setInscriptiondate (new \DateTime());
+        
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -46,6 +54,7 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('registration/register.html.twig', [
+            // return $this->render('registration/connection.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
