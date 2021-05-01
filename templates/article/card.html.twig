@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Article{% endblock %}
+
+{% block body %}
+
+<!-- Fil conducteur -->
+<p class="mt-5 ml-2"><a href="{{ path('homepage') }}">Accueil</a> - <a href="{{ app.request.headers.get('referer') }}">Retour à la liste précédente</a></p>
+<h1 class="ml-5">Edit Article</h1>
+
+<div class="container_fluid" id="BigBody">
+{#
+    {% for article in articles %}
+    {% set countTotal = countTotal + 1 %}
+    {% if article.category == category.id %}
+        {% set countByCategory = countByCategory + 1 %}
+    {% endif %}
+{% endfor %}
+<p>- Il y a {{ countTotal }} produits au total dans notre catalog...</p>
+<p>- Il y a {{ countByCategory }} produits dans cette catégorie !</p>
+#}
+
+{% set imgCur = article.image %}
+    <div class="d-flex flex-row ml-5">
+        <div class="d-flex flex-column card--imgs">
+            <img src="{{ article.image }}" class="card-img-top card--img" alt="">
+            <div class="d-flex flex-row">
+                Carousel à créer, avec des images boutons
+            </div>
+        </div>
+        <div class="d-flex flex-column card--body ml-3">
+            <!-- titre -->
+            <div class="d-flex flex-row">
+                <h3>{{ article.title }}</h3>
+                <h5>{{ article.category }}</h5>
+            </div>
+            <!-- region -->
+            <div class="d-flex flex-row">
+                <h5>{{ article.region }}</h5>
+            </div>
+            <!-- description -->
+            <div class="d-flex flex-row">
+                <p>{{ article.description }}</p>
+            </div>
+            <!-- score -->
+            <div class="d-flex flex-row">
+                5 étoiles colorées selon SCORE
+            </div>
+            <!-- cappacité / prix -->
+            <div class="d-flex flex-row"></div>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

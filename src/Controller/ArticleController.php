@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Category;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,6 +16,27 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ArticleController extends AbstractController
 {
+
+    /**
+     * @Route("/catalog/{id}", name="article_catalog", methods={"GET"})
+     */
+    public function catalog(ArticleRepository $articleRepository, Category $category): Response
+    {
+        return $this->render('article/catalog.html.twig', [
+            'articles'  => $articleRepository->findAll(),
+            'category'  => $category,
+        ]);
+    }
+    /**
+     * @Route("/card/{id}", name="article_card", methods={"GET"})
+     */
+    public function card(Article $article): Response
+    {
+        return $this->render('article/card.html.twig', [
+            'article' => $article,
+        ]);
+    }
+
     /**
      * @Route("/", name="article_index", methods={"GET"})
      */
@@ -43,8 +65,8 @@ class ArticleController extends AbstractController
         }
 
         return $this->render('article/new.html.twig', [
-            'article' => $article,
-            'form' => $form->createView(),
+            'article'   => $article,
+            'form'      => $form->createView(),
         ]);
     }
 

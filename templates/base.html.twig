@@ -44,11 +44,14 @@ $twig->addExtension(new AppExtension());
                         <ul class="navbar-nav mr-0">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Par category
+                                    Nos produits...
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <span style="padding:0 0 0 10px;" disabled>Par catégorie :</span>
+                                    <div class="dropdown-divider"></div>
                                     {% for category in categories() %}
-                                        <a class="dropdown-item" href="{{ path('category_show', {'id': category.id}) }}">{{ category.label }}</a>
+                                    <a class="dropdown-item" href="{{ path('article_catalog', {'id': category.id}) }}">{{ category.label }}</a>
+                                    <!-- <a class="dropdown-item" href="{{ path('category_show', {'id': category.id}) }}">{{ category.label }}</a> -->
                                     {% endfor %}
                                 </div>
                             </li>
@@ -101,8 +104,8 @@ $twig->addExtension(new AppExtension());
                         {% endif %}
                     </div>
                 </nav>
-                <!-- -->
-                <div class="d-flex flex-row" id="DivLang">
+                <!-- Boutons de changement de langue -->
+                <!-- <div class="d-flex flex-row" id="DivLang">
                     <div class="d-flex flex-row DivLang DivLangEn">
                         <div class="DivImgFlag ImgFlagEn"></div>
                         <p>En</p>
@@ -111,7 +114,7 @@ $twig->addExtension(new AppExtension());
                         <div class="DivImgFlag ImgFlagFr"></div>
                         <p>Fr</p>
                     </div>
-                </div>
+                </div> -->
             </div>
         </header>
 
