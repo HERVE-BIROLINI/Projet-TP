@@ -34,6 +34,13 @@
                             placeholder="Mot de passe"
                             name="password" required
                         >
+                        {% if errPwd is not null %}
+                            <div class="alert" role="alert"
+                                style="background-color: rgb(83, 22, 22);color: rgba(253, 191, 21, 0.836);"
+                            >   
+                                {{ errPwd }}
+                            </div>
+                        {% endif %}
                         <br>
                         <button class="btn btn-sm btnUser" type="submit" form="login">Soumettre</button>
                         <p class="signup">

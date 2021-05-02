@@ -1,6 +1,11 @@
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900display=swap%27);
+*{
+    font-family: "Poppins", sans-serif;
+}
+
 body {
-    /* background: rgb(83, 22, 22); */
-    background-color: lightgray;
+    background: rgb(83, 22, 22);
+    /* background-color: lightgray; */
 }
 /**/
 header{
@@ -9,8 +14,15 @@ header{
     top:0px;
     z-index: 1;
 }
+h1,.LifeLine{
+    color:rgba(253, 191, 21, 0.836);
+}
+.nav--Profile{
+    color:rgb(83, 22, 22);
+}
 #BigBody{
     width:95%;
+    margin-top:50px;
     /* border:5px solid cyan; */
     justify-content:center;
 }
@@ -20,6 +32,14 @@ header{
     color:rgba(253, 191, 21, 0.836);
 }
 .btnUser:hover{
+    background-color: rgba(253, 191, 21, 0.836);
+    color:rgb(83, 22, 22);
+    border:1px solid rgb(83, 22, 22);
+}
+.btn-secondary{
+	color: rgba(253, 191, 21, 0.836);
+}
+.btn-light:hover{
     background-color: rgba(253, 191, 21, 0.836);
     color:rgb(83, 22, 22);
     border:1px solid rgb(83, 22, 22);
@@ -54,8 +74,6 @@ header{
 }
 
 
-
-
 /* #LogoContainer{ */
     /* background-color: white; */
 /* } */
@@ -67,94 +85,6 @@ header{
 /* .collapse{ */
     /* justify-content:space-between; */
 /* } */
-
-/* SSI on parvient à faire du multi-langues */
-#DivLang{
-    justify-self:end;
-    align-items:center;
-    padding-right:20px;
-}
-.DivLang{
-    width:80px;
-    height:30px;
-    margin:0.35em;
-    border:1px solid black;
-    border-radius: 5px;
-    justify-content: space-evenly;
-    align-items: center;
-}
-.DivLang:hover{
-    cursor:pointer;
-}
-.DivLang>p{
-    font-size: 0.65x;;
-    margin-top: 14px;
-    color:black;
-}
-.DivImgFlag{
-    height:25px;
-    width:25px;
-    margin-top: 5px;
-    /**/
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-}
-.DivLangFr{
-    box-shadow:inset 2px 2px 6px black;
-    font-size:1.1em;
-    font-weight:bolder;
-}
-.DivLangEn{
-    box-shadow:2px 2px 6px black;
-}
-.ImgFlagEn{
-    /* FONCTIONNE A PARTIR D'ASSETS SEULEMENT */ 
-    background-image: url(/assets/images/flag_en.png);
-}
-.ImgFlagFr{
-    /* FONCTIONNE A PARTIR D'ASSETS SEULEMENT */ 
-    background-image: url(/assets/images/flag_fr.png);
-}
-/* ************************************* */
-
-
-#BigBody{
-    margin-top:50px;
-}
-
-.TestImg1{
-    width:25%;
-    height:100px;
-    border:2px solid red;
-}
-.TestImg2{
-    width:25%;
-    height:100px;
-    border:2px solid yellow;
-}
-#TestImg1{
-    width:25%;
-    height:100px;
-    border:2px solid green;
-    /**/
-    background-image: url(/assets/images/bckgrd_portfolio_birolini_herve.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    /* background-attachment: fixed; */
-    background-position: center center ;
-}
-#TestImg2{
-    width:25%;
-    height:100px;
-    border:2px solid blue;
-    /**/
-    /* background-image: url("../../images/logo.PNG"); */
-    background-repeat: no-repeat;
-    background-size: cover;
-    /* background-attachment: fixed; */
-    background-position: center center ;
-}
 
 
 
@@ -305,3 +235,101 @@ header{
 }
 /* Section pages connection User : FIN */
 /***************************************/
+
+
+
+/****************************************/
+/* Section pages profil de User : DEBUT */
+.profile-tab-nav{
+	min-width:250px;
+    background-color:  rgba(253, 191, 21, 0.836);
+}
+.nav-pills{
+    padding:15px 20px;
+    border-bottom:1px rgb(83, 22, 22);
+    /* border-radius:0; */
+    /* color:#333; */
+    /* width:20px; */
+}
+/* .nav--Profile{
+	color:  rgb(83, 22, 22);
+} */
+.tab-content{
+	flex:1;
+}
+/* a{ */
+	/* color:rgb(83, 22, 22); */
+	/* font-weight:500; */
+/* } */
+.h3--Profile{
+    color: rgba(253, 191, 21, 0.836);
+}
+.form-group label,.label--Profile{
+    color: rgb(83, 22, 22);
+    font-weight: 500;
+}
+.shadow{
+	box-shadow: 0 2px 10px red(0, 0, 0, 0.1) ;
+}
+/* Section pages profil de User : FIN */
+/**************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+/* SSI on parvient à faire du multi-langues */
+/* #DivLang{
+    justify-self:end;
+    align-items:center;
+    padding-right:20px;
+}
+.DivLang{
+    width:80px;
+    height:30px;
+    margin:0.35em;
+    border:1px solid black;
+    border-radius: 5px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.DivLang:hover{
+    cursor:pointer;
+}
+.DivLang>p{
+    font-size: 0.65x;;
+    margin-top: 14px;
+    color:black;
+}
+.DivImgFlag{
+    height:25px;
+    width:25px;
+    margin-top: 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+.DivLangFr{
+    box-shadow:inset 2px 2px 6px black;
+    font-size:1.1em;
+    font-weight:bolder;
+}
+.DivLangEn{
+    box-shadow:2px 2px 6px black;
+}
+.ImgFlagEn{
+    //FONCTIONNE A PARTIR D'ASSETS SEULEMENT 
+    background-image: url(/assets/images/flag_en.png);
+}
+.ImgFlagFr{
+    //FONCTIONNE A PARTIR D'ASSETS SEULEMENT 
+    background-image: url(/assets/images/flag_fr.png);
+}
+ */

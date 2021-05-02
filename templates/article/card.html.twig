@@ -5,7 +5,7 @@
 {% block body %}
 
 <!-- Fil conducteur -->
-<p class="mt-5 ml-2"><a href="{{ path('homepage') }}">Accueil</a> - <a href="{{ app.request.headers.get('referer') }}">Retour à la liste précédente</a></p>
+<p class="mt-5 ml-2"><a class="LifeLine" href="{{ path('homepage') }}">Accueil</a> - <a class="LifeLine" href="{{ app.request.headers.get('referer') }}">Retour à la liste précédente</a></p>
 <h1 class="ml-5">Edit Article</h1>
 
 <div class="container_fluid" id="BigBody">
@@ -46,7 +46,7 @@
             <div class="d-flex flex-row">
                 5 étoiles colorées selon SCORE
             </div>
-            <!-- cappacité / prix -->
+            <!-- capacité / prix -->
             <div class="d-flex flex-row"></div>
 
         </div>

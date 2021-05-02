@@ -19,8 +19,7 @@ class ConnectionController extends AbstractController
      * Route("/login", name="app_login")
      * @Route("/connection", name="app_connection")
      */
-    public function connection(AuthenticationUtils $authenticationUtils
-                            ): Response{        
+    public function connection(AuthenticationUtils $authenticationUtils): Response{        
 
         // LOGIN
         //--
@@ -41,7 +40,8 @@ class ConnectionController extends AbstractController
         // Situation d'entrée dans le Controller/Form ($_POST = null)
         return $this->render('security/connection.html.twig', [
             'last_username' => $lastUsername, 
-            'error' => $error,
+            'error'         => $error,
+            'errPwd'        => null,
             //
             'registrationForm' => $form_register->createView(),
             // variable pour l'affichage de la DIV 
@@ -53,8 +53,7 @@ class ConnectionController extends AbstractController
     /**
      * @Route("/logout", name="app_logout")
      */
-    public function logout()
-    {
+    public function logout(){
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
@@ -73,11 +72,31 @@ class ConnectionController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+        //
+        if(isset($error) && $error->getCode()==0){
+            $user = new User();
+            $user->setInscriptiondate (new \DateTime());
+            // création formulaire
+            $form_register = $this->createForm(RegistrationFormType::class, $user);
+    
+            $errPwd="Error de mot de passe...";
+            // $this->addFlash('verify_password_error',"Error de mot de passe...");
 
-        // return $this->render('security/login.html.twig', 
-        // ['last_username' => $lastUsername, 'error' => $error,]);
-        return $this->redirectToRoute('homepage');
-        echo"<br> - entrer dans login !....";
+            // Situation d'entrée dans le Controller/Form ($_POST = null)
+            return $this->render('security/connection.html.twig', [
+                'last_username' => $lastUsername, 
+                'error'         => $error,
+                'errPwd'        => $errPwd,
+                //
+                'registrationForm' => $form_register->createView(),
+                // variable pour l'affichage de la DIV 
+                'form_register' => $form_register
+            ]);
+        }
+        else{
+            return $this->redirectToRoute('homepage');
+            echo"<br> - entrer dans login !....";
+        }
     }
 
     // route rgister by POST
