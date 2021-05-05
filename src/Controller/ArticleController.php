@@ -12,23 +12,24 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/article")
+ * @Route("/article", name="article_")
  */
 class ArticleController extends AbstractController
 {
 
     /**
-     * @Route("/catalog/{id}", name="article_catalog", methods={"GET"})
+     * @Route("/catalog/{id}", name="catalog", methods={"GET"})
      */
     public function catalog(ArticleRepository $articleRepository, Category $category): Response
     {
+        // dd()
         return $this->render('article/catalog.html.twig', [
             'articles'  => $articleRepository->findAll(),
             'category'  => $category,
         ]);
     }
     /**
-     * @Route("/card/{id}", name="article_card", methods={"GET"})
+     * @Route("/card/{id}", name="card", methods={"GET"})
      */
     public function card(Article $article): Response
     {
@@ -38,7 +39,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/", name="article_index", methods={"GET"})
+     * @Route("/", name="index", methods={"GET"})
      */
     public function index(ArticleRepository $articleRepository): Response
     {
@@ -48,7 +49,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="article_new", methods={"GET","POST"})
+     * @Route("/new", name="new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -71,16 +72,17 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="article_show", methods={"GET"})
+     * @Route("/{id}", name="show", methods={"GET"})
      */
-    public function show(Article $article): Response{
+    public function show(Article $article): Response
+    {
         return $this->render('article/show.html.twig', [
             'article' => $article,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Article $article): Response
     {
@@ -100,7 +102,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="article_delete", methods={"POST"})
+     * @Route("/{id}", name="delete", methods={"POST"})
      */
     public function delete(Request $request, Article $article): Response
     {

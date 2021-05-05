@@ -19,10 +19,14 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+
+/**
+ * Route("/", name="app_")
+ */
 class RegistrationController extends AbstractController
 {
     /** DESACTIVEE AU PROFIT DE CELLE DANS CONNECTIONCONTROLLER
-     * Route("/register", name="app_register")
+     * Route("/register", name="register")
      */
     public function register(Request $request
                             , UserPasswordEncoderInterface $passwordEncoder

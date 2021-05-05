@@ -22,6 +22,11 @@ class Picture
      */
     private $pathname;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="pictures")
+     */
+    private $article;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +40,18 @@ class Picture
     public function setPathname(string $pathname): self
     {
         $this->pathname = $pathname;
+
+        return $this;
+    }
+
+    public function getArticle(): ?Article
+    {
+        return $this->article;
+    }
+
+    public function setArticle(?Article $article): self
+    {
+        $this->article = $article;
 
         return $this;
     }

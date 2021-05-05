@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -60,6 +62,31 @@ class User implements UserInterface
      * @ORM\Column(type="date")
      */
     private $inscriptiondate;
+
+    /**
+     * @ORM\Column(type="string", length=128, nullable=true)
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="decimal", precision=5, scale=0, nullable=true)
+     */
+    private $postalcode;
+
+    /**
+     * @ORM\Column(type="string", length=64, nullable=true)
+     */
+    private $city;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Kart::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $karts;
+
+    public function __construct()
+    {
+        $this->karts = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -198,6 +225,72 @@ class User implements UserInterface
     public function setInscriptiondate(\DateTimeInterface $inscriptiondate): self
     {
         $this->inscriptiondate = $inscriptiondate;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getPostalcode(): ?string
+    {
+        return $this->postalcode;
+    }
+
+    public function setPostalcode(?string $postalcode): self
+    {
+        $this->postalcode = $postalcode;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Kart[]
+     */
+    public function getKarts(): Collection
+    {
+        return $this->karts;
+    }
+
+    public function addKart(Kart $kart): self
+    {
+        if (!$this->karts->contains($kart)) {
+            $this->karts[] = $kart;
+            $kart->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeKart(Kart $kart): self
+    {
+        if ($this->karts->removeElement($kart)) {
+            // set the owning side to null (unless already changed)
+            if ($kart->getUser() === $this) {
+                $kart->setUser(null);
+            }
+        }
 
         return $this;
     }

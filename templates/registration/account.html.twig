@@ -8,18 +8,16 @@
     {% endfor %}
 	
 	<!--debut barre a gaucher--> 
-
 	<form class="py-5 my-5" method="post">
 		<div class="container">
 			<div class="bg-white shadow rounded-lg d-block d-sm-flex">
 				<div class="profile-tab-nav border-right">
 					<div class="nav d-flex flex-column nav-pills">
-						<a class="nav-link nav--Profile" href="{{ path('app_account', {'id': app.user.id}) }}"><i class="ri-profile-line"></i>  Comptes</a>
+						<a class="nav-link nav--Profile" href="#"><i class="ri-profile-line"></i>  Comptes</a>
 						<a class="nav-link nav--Profile" href="{{ path('app_access', {'id': app.user.id}) }}"><i class="ri-shield-user-line"></i>  Securité</a>
-						<a class="nav-link nav--Profile" href="#"><i class="ri-shopping-cart-line"></i>  Panier</a>
-						<a class="nav-link nav--Profile" href="#"><i class="ri-history-line"></i>  Historique des commandes</a>
+                        <a class="nav-link nav--Profile" href="{{ path('kart_user') }}"><i class="ri-shopping-cart-line"></i>  Panier</a>
+						<a class="nav-link nav--Profile" href="{{ path('kart_history') }}"><i class="ri-history-line"></i>  Historique des commandes</a>
 						<a class="nav-link nav--Profile" href="{{ path('app_logout') }}"><i class="ri-logout-circle-r-line"></i>  Déconnexion</a>
-						
 					</div>
 				</div>
 				<!--Fin de la barre gauche--> 
@@ -28,7 +26,7 @@
 				{{ form_start(registrationForm) }}
 				<div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
 					<div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
-						<h3 class="mb-4 h3--Profile">INFORMATION PERSONNELLES</h3>
+						<h3 class="mb-4 label--Profile">INFORMATION PERSONNELLES</h3>
 						<div class="row">
 							<div class="col-md-6">
 								{{ form_row(registrationForm.firstname) }}
@@ -47,22 +45,25 @@
 								{{ form_errors(registrationForm.birthdate)}}
 							</div>
 							<div class="col-md-6">
-								<div class="form-group">
+								{{ form_row(registrationForm.address) }}
+								<!-- <div class="form-group">
 									<label>Adresse</label>
 									<input type="text" class="form-control" name="" value="">
-								</div>
+								</div> -->
 							</div>
 							<div class="col-md-6">
-								<div class="form-group">
+								{{ form_row(registrationForm.postalcode) }}
+								<!-- <div class="form-group">
 									<label>Code Postal</label>
 									<input type="text" class="form-control" name="" value="">
-								</div>
+								</div> -->
 							</div>
 							<div class="col-md-6">
-								<div class="form-group">
+								{{ form_row(registrationForm.city) }}
+								<!-- <div class="form-group">
 									<label>Ville</label>
 									<input type="text" class="form-control" name="" value="">
-								</div>
+								</div> -->
 							</div>
 							<div class="mt-3">
 								<button class="btn btn-sm btnUser" type="submit">Soumettre</button>

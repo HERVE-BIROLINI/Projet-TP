@@ -29,35 +29,45 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface{
         ],
         // ....
     ];
+
+    // /!\ INDISPENSABLE POUR HASHER LE MOT DE PASSE DANS LOAD /!\
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
 // Pour déclencher LOAD à partir du Terminal
 // bin/console doctrine:fixtures:load
     public function load(ObjectManager $manager){
-        foreach (self::USERS as $User) {
+        foreach (self::USERS as $Item) {
             $obUser = new User(
-                // $User['email'],
-                // $User['roles'],
-                // $User['password'],
-                // $User['firstname'],
-                // $User['lastname'],
-                // $User['birthdate'],
-                // $User['hasagreetoterms'],
+                // ex : mauvaise méthode :
+                // $Item['email'],
+                // $Item['roles'],
             );
             // $obUser->new \DateTime()
-            $obUser->setEmail($User['email']);
-            $obUser->setRoles($User['roles']);
-            // $obUser->setPassword($User['password']);
-            $obUser->setFirstname($User['firstname']);
-            $obUser->setLastname($User['lastname']);
-            $obUser->setBirthdate($User['birthdate']);
-            $obUser->setInscriptiondate (new \DateTime());
+            $obUser->setEmail($Item['email']);
+            $obUser->setRoles($Item['roles']);
+            // $obUser->setPassword($Item['password']);
+            $obUser->setFirstname($Item['firstname']);
+            $obUser->setLastname($Item['lastname']);
+            $obUser->setBirthdate(new \DateTime($Item['birthdate']));
+            $obUser->setInscriptiondate(new \DateTime());
+            $obUser->setHasagreetoterms($Item['hasagreetoterms']);
+            //
             $obUser->setPassword(
-                $this->encoder->encodePassword( // ???
-                // $passwordEncoder->encodePassword(
+                $this->encoder->encodePassword(
                     $obUser,
-                    $User['password']
+                    $Item['password']
                 )
             );
             //
+
+// utiliser AVANT Persist le setReference, 
+// afin de stocker en mémoire les instances des objets 
+// $this->setReference($Item['email'],$obUser);
+
+            ///
             $manager->persist($obUser);
         }
         //
@@ -71,6 +81,6 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface{
      * @return integer
      */
     public function getOrder(): int{
-        return 3;
+        return 2;
     }
 }

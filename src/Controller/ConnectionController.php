@@ -13,11 +13,16 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+
+/**
+ * 
+ * @Route("/", name="app_")
+ */
 class ConnectionController extends AbstractController
 {
     /**
-     * Route("/login", name="app_login")
-     * @Route("/connection", name="app_connection")
+     * 
+     * @Route("/connection", name="connection")
      */
     public function connection(AuthenticationUtils $authenticationUtils): Response{        
 
@@ -51,7 +56,7 @@ class ConnectionController extends AbstractController
 
 
     /**
-     * @Route("/logout", name="app_logout")
+     * @Route("/logout", name="logout")
      */
     public function logout(){
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
@@ -64,7 +69,7 @@ class ConnectionController extends AbstractController
 
     // route login by POST
     /**
-     * @Route("/login", name="app_login")
+     * @Route("/login", name="login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -101,7 +106,7 @@ class ConnectionController extends AbstractController
 
     // route rgister by POST
     /**
-     * @Route("/register", name="app_register")
+     * @Route("/register", name="register")
      */
     public function register(Request $request
                             , UserPasswordEncoderInterface $passwordEncoder

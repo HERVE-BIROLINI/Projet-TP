@@ -54,38 +54,38 @@ class AccountFormType extends AbstractType
                 ],
             ])
             // ADRESSE POSTALE
-            // ->add('address',TextType::class,[
-            //     'label'         =>  "N° et voie :",
-            //     'attr'          => ['placeholder'   => "ex: 1 avenue des Champs-Elysées",],
-            //     'required'      =>  true,
-            //     'constraints'   =>  [
-            //         new NotBlank(['message'=>"Le n° et le nom de la voie sont obligatoire"]),
-            //     ],
-            // ])
-            // // 
-            // ->add('postalcode',TextType::class,[
-            //     'label'         =>  "Code postal :",
-            //     'attr'          => ['placeholder'   => "ex: 75008",],
-            //     'required'      =>  true,
-            //     'constraints'   =>  [
-            //         new NotBlank(['message'=>"Le code postal est obligatoire"]),
-            //         new Length([
-                        // 'min'       => 7,
-                        // 'max'       => 7,
-                        // 'minMessage'   => 'Un code postal est composé de 5 chiffres',
-                        // 'maxMessage'   => 'Un code postal est composé de 5 chiffres',
-            //         ]),
-            //     ],
-            // ])
-            // // 
-            // ->add('city',TextType::class,[
-            //     'label'         =>  "Ville :",
-            //     'attr'          => ['placeholder'   => "ex: Paris",],
-            //     'required'      =>  true,
-            //     'constraints'   =>  [
-            //         new NotBlank(['message'=>"La ville est obligatoire"]),
-            //     ],
-            // ])
+            ->add('address',TextType::class,[
+                'label'         =>  "N° et voie :",
+                'attr'          => ['placeholder'   => "ex: 1 avenue des Champs-Elysées",],
+                'required'      =>  true,
+                'constraints'   =>  [
+                    new NotBlank(['message'=>"Le n° et le nom de la voie sont obligatoire"]),
+                ],
+            ])
+            // 
+            ->add('postalcode',TextType::class,[
+                'label'         =>  "Code postal :",
+                'attr'          => ['placeholder'   => "ex: 75008",],
+                'required'      =>  true,
+                'constraints'   =>  [
+                    new NotBlank(['message'=>"Le code postal est obligatoire"]),
+                    new Length([
+                        'min'       => 5,
+                        'max'       => 5,
+                        'minMessage'   => 'Un code postal est composé de 5 chiffres',
+                        'maxMessage'   => 'Un code postal est composé de 5 chiffres',
+                    ]),
+                ],
+            ])
+            // 
+            ->add('city',TextType::class,[
+                'label'         =>  "Ville :",
+                'attr'          => ['placeholder'   => "ex: Paris",],
+                'required'      =>  true,
+                'constraints'   =>  [
+                    new NotBlank(['message'=>"La ville est obligatoire"]),
+                ],
+            ])
         ;
     }
 

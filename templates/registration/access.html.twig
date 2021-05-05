@@ -3,20 +3,21 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
+	{% for flashError in app.flashes('verify_password_error') %}
+		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+	{% endfor %}
 	
 	<!--debut barre a gaucher--> 
-
 	<form class="py-5 my-5" method="post">
 		<div class="container">
 			<div class="bg-white shadow rounded-lg d-block d-sm-flex">
 				<div class="profile-tab-nav border-right">
 					<div class="nav d-flex flex-column nav-pills">
 						<a class="nav-link nav--Profile" href="{{ path('app_account', {'id': app.user.id}) }}"><i class="ri-profile-line"></i>  Comptes</a>
-						<a class="nav-link nav--Profile" href="{{ path('app_access', {'id': app.user.id}) }}"><i class="ri-shield-user-line"></i>  Securité</a>
-						<a class="nav-link nav--Profile" href="#"><i class="ri-shopping-cart-line"></i>  Panier</a>
-						<a class="nav-link nav--Profile" href="#"><i class="ri-history-line"></i>  Historique des commandes</a>
+						<a class="nav-link nav--Profile" href="#"><i class="ri-shield-user-line"></i>  Securité</a>
+                        <a class="nav-link nav--Profile" href="{{ path('kart_user') }}"><i class="ri-shopping-cart-line"></i>  Panier</a>
+						<a class="nav-link nav--Profile" href="{{ path('kart_history') }}"><i class="ri-history-line"></i>  Historique des commandes</a>
 						<a class="nav-link nav--Profile" href="{{ path('app_logout') }}"><i class="ri-logout-circle-r-line"></i>  Déconnexion</a>
-						
 					</div>
 				</div>
 				<!--Fin de la barre gauche--> 
@@ -25,18 +26,12 @@
 				{{ form_start(registrationForm) }}
 				<div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
 					<div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
-						<h3 class="mb-4 h3--Profile">SECURITE</h3>
+						<h3 class="mb-4 label--Profile">SECURITE</h3>
 						<div class="col-md-6">
 							<input type="password" class="form-control" id="inputPassword"
 								placeholder="Mot de passe actuel..."
 								name="password-old" required
 							>
-							{% for flashError in app.flashes('verify_password_error') %}
-								<div class="alert" role="alert"
-									style="background-color: rgb(83, 22, 22);color: rgba(253, 191, 21, 0.836);">
-									{{ flashError }}
-								</div>
-							{% endfor %}
 							{#{{ form_help(registrationForm.email)}}#}
 							{#{{ form_errors(registrationForm.email)}}#}
 							<hr>
@@ -55,6 +50,6 @@
 			</div>
 		</div>
 	</form>
-	<!--Fin rectangle centrale--> 
+	<!--Fin rectangle centrale-->
 
 {% endblock %}

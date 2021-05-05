@@ -1,15 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <html>
     <head>
-        <meta charset="utf-8"/>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- -->
+        <meta http-equiv="Content-Type" content="text/html/php/twig"/>
         <meta name="description" content="Projet de groupe titre professionnel"/>
         <meta name="author" content="NSIM / ILLARIONOVA / PASCAL / BIROLINI"/>
         
-<link rel="icon" type="image/png" href="{{ asset('build/images/TiroirDuTerroir-ico.png') }}"/>
+        <link rel="icon" type="image/png" href="{{ asset('build/images/TiroirDuTerroir-ico.png') }}"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
         <title>{% block title %}Welcome!{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
@@ -20,7 +22,7 @@
 
     </head>
     
-    <body>
+    <body class="mb-5 pb-5">
         
         <header>
             <div class="d-flex flex-row w-100 bg-light justify-content-between">
@@ -41,11 +43,19 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Nos produits...
                                 </a>
-                                <div class="dropdown-menu" ><!-- aria-labelledby="navbarDropdown">-->
-                                    <span style="padding:0 0 0 10px;" disabled>Par catégorie :</span>
+                                <div class="dropdown-menu" ><!-- aria-labelledby="navbarDropdown"> -->
+                                    <!-- -->
+                                    <span style="padding:0 0 0 10px;font-style:italic" disabled>Par catégorie :</span>
                                     <div class="dropdown-divider"></div>
-                                    {% for category in categories() %}
+                                    {% for category in getcategories() %}
                                     <a class="dropdown-item" href="{{ path('article_catalog', {'id': category.id}) }}">{{ category.label }}</a>
+                                    {% endfor %}
+                                    <!-- -->
+                                    <div class="dropdown-divider"></div>
+                                    <span style="padding:0 0 0 10px;font-style:italic" disabled>Par région :</span>
+                                    <div class="dropdown-divider"></div>
+                                    {% for region in getregions() %}
+                                    <a class="dropdown-item" href="">{{ region[0] }}</a>
                                     {% endfor %}
                                 </div>
                             </li>
@@ -58,8 +68,8 @@
                                 <a class="nav-link" href="{{ path('app_account', {'id': app.user.id}) }}"><i class="ri-profile-line"></i>  {{ app.user.firstname }} {{ app.user.lastname }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class="ri-shopping-cart-line"></i>  Panier</a>
-                                <!-- <a class="nav-link" href="{#{{ path('') }}#}">{#{{ app.user.firstname }} {{ app.user.lastname }}#}</a> -->
+                                <!-- <a class="nav-link" href=""><i class="ri-shopping-cart-line"></i>  Panier</a> -->
+                                <a class="nav-link" href="{{ path('kart_user') }}"><i class="ri-shopping-cart-line"></i>  Panier</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('app_logout') }}"><i class="ri-logout-circle-r-line"></i>  Déconnexion</a>
@@ -82,17 +92,7 @@
                         <ul class="navbar-nav ml-0">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('app_connection') }}"><i class="ri-login-box-line"></i>   Connexion</a>
-                                <!-- <a class="nav-link" href="{#{{ path('app_login') }}#}">Connexion</a> -->
                             </li>
-                            <!-- <li>/</li> -->
-                            <!-- <li class="nav-item"> -->
-                                <!-- <a class="nav-link" href="{#{{ path('app_register') }}#}"><i class="ri-user-add-line"></i>  Inscription</a> -->
-                                <!-- <a class="nav-link" href="{#{{ path('app_register') }}#}">Inscription</a> -->
-                            <!-- </li> -->
-                            <!-- <li class="nav-item"> -->
-                                <!-- <a class="nav-link" href="{#{{ path('app_login') }}#}"><i class="ri-login-circle-line"></i>  Log In</a> -->
-                                <!-- <a class="nav-link" href="{#{{ path('app_login') }}#}">Connexion</a> -->
-                            <!-- </li> -->
                         </ul>
                         {% endif %}
                     </div>
@@ -111,6 +111,9 @@
             </div>
         </header>
 
+        <div class="d-flex flex-row banner">
+            <img class="imgbanner--logo" src="{{ asset('build/images/TiroirDuTerroir-logo.png') }}" alt="Logo Tiroir du Terroir">
+        </div>
 
         {% block body %}
 
@@ -124,9 +127,9 @@
         {% endblock %}
     </body>
 
-    <div style="padding-top:30px"></div>
+    <div>
 
-    <footer class="d-flex flex-column mt-2">
+    <footer class="d-flex flex-column"><!-- </footer>mt-2"> -->
     <!-- Incorporation du Javascript spécifiques à cette section du HTML,
         pour éviter les dissociation/désactivation de l'utilisateur : -->
         <script type="text/javascript">
@@ -162,7 +165,7 @@
                 bottom:-0.75em;
                 /* bottom:0; */
                 width:100%;
-                z-index: 1;
+                /* z-index: 1; */
                 /**/
                 text-align:center;
                 background-color:  rgba(253, 191, 21, 0.836);
@@ -193,10 +196,16 @@
             <a href="tel:0611223344" title="Nous téléphoner">
                 <i class="ri-phone-line ShortCuts"></i>
             </a>
+            <a href="{{ asset('build/images/CGV.html') }}" title="CGV" target="_blank">
+                <i class="ri-bookmark-fill ShortCuts"></i>
+            </a>
+            <a href="{{ asset('build/images/mentions_legales.html') }}" title="Mentions légales" target="_blank">
+                <i class="ri-flag-2-fill ShortCuts"></i>
+            </a>
         </div>
         <p>
             © Mars 2021 - Ce site a été créé comme projet de soutenance sous
-            Symfony 5, par Nsimba KASEKA, Maxime PASCAL, et Hervé BIROLINI
+            Symfony 5, par Samantha Kaseka NSIMBA, Maxime PASCAL, et Hervé BIROLINI
         </p>
 
     </footer>

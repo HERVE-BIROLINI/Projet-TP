@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,14 +50,31 @@ class Article
     private $Score;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * ORM\Column(type="string", length=255)
+     */
+    // private $Image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $Category;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="article")
      */
-    private $Image;
+    private $pictures;
+
+    /**
+     * @ORM\OneToMany(targetEntity=KartItem::class, mappedBy="article")
+     */
+    private $kartItems;
+
+    public function __construct()
+    {
+        $this->kartItems = new ArrayCollection();
+    }
+
 
     // public function __construct
     // ($Title,$Description,$Region,$Capacity,$Price,$Score,$Category,$Image){
@@ -66,6 +85,8 @@ class Article
         // $this->Price=$Price;
         // $this->Score=$Score;
         // $this->Category=$Category;
+        // $this->pictures = new ArrayCollection();
+        //
         // $this->Image=$Image;
     // }
 
@@ -146,12 +167,12 @@ class Article
         return $this;
     }
 
-    public function getCategory(): ?string
+    public function getCategory(): ?Category
     {
         return $this->Category;
     }
 
-    public function setCategory(string $Category): self
+    public function setCategory(?Category $Category): self
     {
         $this->Category = $Category;
 
@@ -169,4 +190,65 @@ class Article
 
         return $this;
     }
+
+    /**
+     * @return Collection|Picture[]
+     */
+    public function getPictures(): Collection
+    {
+        return $this->pictures;
+    }
+
+    public function addPicture(Picture $picture): self
+    {
+        if (!$this->pictures->contains($picture)) {
+            $this->pictures[] = $picture;
+            $picture->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removePicture(Picture $picture): self
+    {
+        if ($this->pictures->removeElement($picture)) {
+            // set the owning side to null (unless already changed)
+            if ($picture->getArticle() === $this) {
+                $picture->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|KartItem[]
+     */
+    public function getKartItems(): Collection
+    {
+        return $this->kartItems;
+    }
+
+    public function addKartItem(KartItem $kartItem): self
+    {
+        if (!$this->kartItems->contains($kartItem)) {
+            $this->kartItems[] = $kartItem;
+            $kartItem->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeKartItem(KartItem $kartItem): self
+    {
+        if ($this->kartItems->removeElement($kartItem)) {
+            // set the owning side to null (unless already changed)
+            if ($kartItem->getArticle() === $this) {
+                $kartItem->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

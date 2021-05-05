@@ -15,3 +15,8 @@ import './bootstrap';
 import 'jquery';
 import 'popper.js';
 import 'bootstrap';
+
+// Carousel page d'accueil
+$('.carousel').carousel({
+    interval: 2500
+});
