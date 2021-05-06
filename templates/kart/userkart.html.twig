@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Panier client{% endblock %}
+{% block title %}Mon Compte{% endblock %}
 
 {% block body %}
     {% for flashError in app.flashes('verify_email_error') %}
@@ -16,7 +16,7 @@
                     <div class="nav d-flex flex-column nav-pills">
                         <a class="nav-link nav--Profile" href="{{ path('app_account', {'id': app.user.id}) }}"><i class="ri-profile-line"></i>  Comptes</a>
                         <a class="nav-link nav--Profile" href="{{ path('app_access', {'id': app.user.id}) }}"><i class="ri-shield-user-line"></i>  Securité</a>
-                        <a class="nav-link nav--Profile" href="#"><i class="ri-shopping-cart-line"></i>  Panier</a>
+                        <a class="nav-link nav--Profile nav--active" href="#"><i class="ri-shopping-cart-line"></i>  Panier</a>
                         <a class="nav-link nav--Profile" href="{{ path('kart_history') }}"><i class="ri-history-line"></i>  Historique des commandes</a>
                         <a class="nav-link nav--Profile" href="{{ path('app_logout') }}"><i class="ri-logout-circle-r-line"></i>  Déconnexion</a>
                     </div>
@@ -28,45 +28,38 @@
                     <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
                         <h3 class="mb-4 label--Profile">PANIER</h3>
                         
-                            <table class="table table--TxtDark">
-                                <thead>
+                            <table class="table table-striped table--txtdark">
+                                <thead class="thead--dark">
                                     <tr>
-                                        <!-- <th>Id</th> -->
                                         <th>Nom</th>
-                                        <!-- <th>Description</th> -->
-                                        <!-- <th>Region</th> -->
                                         <th>Contenance</th>
                                         <th>Prix</th>
-                                        <!-- <th>Score</th> -->
-                                        <!-- <th>Categorie</th> -->
                                         <th>Image</th>
                                         <th>Quantité</th>
                                         <th>Total</th>
-                                        <th>"Actions"</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {% for item in kartItems %}
                                     <tr>
                                         <td>{{ item['article'].Title }}</td>
-                                        <!-- <td>{#{{ item.Description }}#}</td> -->
-                                        <!-- <td>{#{{ item.Region }}#}</td> -->
                                         <td>{{ item.article.Capacity }}</td>
                                         <td class="text-right">{{ item.article.Price }}€</td>
                                         <td>Photo</td>
-                                        <td>{{ item['quantity'] }}</td><!--{#{{ item.Quantity }}#}boutons - et +</td> -->
-                                        <td class="text-right">
-                                            {{ item.article.Price * item.quantity }}€
-                                        </td>
                                         <td>
-                                            <a class="btn btn-success btn-sm" href="{{ path('kart_add', {id: item.article.id}) }}">
-                                                <i class="bi bi-cart-plus"></i>
-                                                <i class="ri-add-line"></i>
-                                            </a>
-                                            <a class="btn btn-warning btn-sm" href="{{ path('kart_remove', {id: item.article.id}) }}">
-                                                <i class="bi bi-cart-dash"></i>
-                                                <i class="ri-subtract-line"></i>
-                                            </a>
+                                            <div class="divnowrap--cart">
+                                                <a class="btn btn-sm" href="{{ path('kart_remove', {id: item.article.id}) }}">
+                                                    <img class="imgbtn--cart" src="{{ asset('build/images/minus.png') }}">
+                                                </a>
+                                                {{ item['quantity'] }}
+                                                <a class="btn btn-sm" href="{{ path('kart_add', {id: item.article.id}) }}">
+                                                    <img class="imgbtn--cart" src="{{ asset('build/images/plus.png') }}">
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td class="text-right">{{ item.article.Price * item.quantity }}€</td>
+                                        <td>
                                             <a class="btn btn-danger btn-sm" href="{{ path('kart_delete', {id: item.article.id}) }}">
                                                 <i class="bi bi-cart-moins"></i>
                                                 <i class="ri-delete-bin-5-line"></i>
@@ -99,7 +92,7 @@
 
                             {% if kartItems %}
                             <!-- <div class="mt-3"> -->
-                                <input type="hidden" name="validKart" value="ok">
+                            <input type="hidden" name="validKart" value="ok">
                             <button class="btn btn-sm btnUser" type="submit">Passer la commande</button>
                             <!-- <a class="btn btn-sm btn-secondary" href="{{ path('homepage') }}">Annuler</a> -->
                             {% endif %}

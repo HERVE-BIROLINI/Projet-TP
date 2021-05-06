@@ -38,7 +38,7 @@ class ConnectionController extends AbstractController
         //--
         // nouvelle instance de l'Entity User
         $user = new User();
-        $user->setInscriptiondate (new \DateTime());
+        $user->setInscriptiondate(new \DateTime());
         // création formulaire
         $form_register = $this->createForm(RegistrationFormType::class, $user);
 
@@ -84,7 +84,7 @@ class ConnectionController extends AbstractController
             // création formulaire
             $form_register = $this->createForm(RegistrationFormType::class, $user);
     
-            $errPwd="Error de mot de passe...";
+            $errPwd="Adresse email et/ou mot de passe invalide(s)...";
             // $this->addFlash('verify_password_error',"Error de mot de passe...");
 
             // Situation d'entrée dans le Controller/Form ($_POST = null)
@@ -98,10 +98,12 @@ class ConnectionController extends AbstractController
                 'form_register' => $form_register
             ]);
         }
-        else{
+        // else{
+            dd('on ne passe jamais là !!!!');
+            // dd($this->getUser()->getFirstname());
+            $this->addFlash('register-success',"Identification réussie, heureux de vous revoir".$this->getUser()->getFirstname()."...");
             return $this->redirectToRoute('homepage');
-            echo"<br> - entrer dans login !....";
-        }
+        // }
     }
 
     // route rgister by POST
@@ -136,6 +138,7 @@ class ConnectionController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
+            $this->addFlash('register-success',"Votre compte a bien été créé, nous sommes heureux de vous compter parmi nos clients...");
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,

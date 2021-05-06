@@ -6,10 +6,13 @@
 {% set countByCategory = 0 %}
 
 {% block body %}
+{% for flashError in app.flashes('adding_to_cart') %}
+    <div class="alert alert-success" role="alert">{{ flashError }}</div>
+{% endfor %}
 
 <!-- Fil conducteur -->
 <div class="mt-5 pt-5"></div>{#<p class="mt-5 ml-2"><a href="{{ path('homepage') }}">Accueil</a>#}
-<h2 class="ml-5">Nos produits de la catégorie "{{ category.label }}({{ category.id }})"</h2>
+<h2 class="ml-5">Votre sélection de produits</h2>
 
 <div class="container-fluid" id="BigBody">
 
@@ -19,7 +22,7 @@
         <!-- /* Colonne Présentation article */ -->
         
         {% for article in articles %}
-            {% if article.category == category %}
+            {% if category is not defined or article['category_id'] == category.id %}
         <Form class="d-flex flex-column card-deck" action="" target="_blank">
             <!-- /* Colonne Image + Titre */ -->
             <div class="card card--column">
@@ -40,7 +43,7 @@
                     <div class="DivArticlePriceColumn">
                         <div class="DivArticlePrice d-flex flex-row">
                             <!-- <span class="card--PriceOld">{#{{ article.price }}#}€</span> -->
-                            <span class="card--Price">{{ article.price }}€</span>
+                            <span class="card--Price">{{ article.price }} €</span>
                         </div>
                         <div class="DivLinearGradientHorizontal"></div>
                     </div>

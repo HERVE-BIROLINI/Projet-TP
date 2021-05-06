@@ -14,7 +14,7 @@
 				<div class="profile-tab-nav border-right">
 					<div class="nav d-flex flex-column nav-pills">
 						<a class="nav-link nav--Profile" href="{{ path('app_account', {'id': app.user.id}) }}"><i class="ri-profile-line"></i>  Comptes</a>
-						<a class="nav-link nav--Profile" href="#"><i class="ri-shield-user-line"></i>  Securité</a>
+						<a class="nav-link nav--Profile nav--active" href="#"><i class="ri-shield-user-line"></i>  Securité</a>
                         <a class="nav-link nav--Profile" href="{{ path('kart_user') }}"><i class="ri-shopping-cart-line"></i>  Panier</a>
 						<a class="nav-link nav--Profile" href="{{ path('kart_history') }}"><i class="ri-history-line"></i>  Historique des commandes</a>
 						<a class="nav-link nav--Profile" href="{{ path('app_logout') }}"><i class="ri-logout-circle-r-line"></i>  Déconnexion</a>
@@ -26,7 +26,7 @@
 				{{ form_start(registrationForm) }}
 				<div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
 					<div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
-						<h3 class="mb-4 label--Profile">SECURITE</h3>
+						<h3 class="mb-4 label--Profile">CHANGEMENT DE MOT DE PASSE</h3>
 						<div class="col-md-6">
 							<input type="password" class="form-control" id="inputPassword"
 								placeholder="Mot de passe actuel..."
@@ -42,7 +42,7 @@
 						</div>
 						<div class="mt-3">
 							<button class="btn btn-sm btnUser" type="submit">Soumettre</button>
-							<a class="btn btn-sm btn-secondary" href="{{ path('homepage') }}">Annuler</a>
+							<!-- <a class="btn btn-sm btn-secondary" href="{#{{ path('homepage') }}#}">Annuler</a> -->
 						</div>
 					</div>
 				</div>

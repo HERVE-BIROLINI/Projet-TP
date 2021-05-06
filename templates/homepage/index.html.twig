@@ -3,8 +3,13 @@
 
 {% block title %}{{ Title }} - {{ parent() }}{% endblock %}
 
-
 {% block body %}
+{% for flashError in app.flashes('adding_to_cart') %}
+    <div class="alert alert-success" role="alert">{{ flashError }}</div>
+{% endfor %}
+{% for flashError in app.flashes('register-success') %}
+    <div class="alert alert-success" role="alert">{{ flashError }}</div>
+{% endfor %}
 
     <div class="container-fluid mt-5 justify-content-center align-items-center">
 
@@ -47,41 +52,25 @@
 
     <div class="cardbox d-flex flex-row flex-wrap justify-content-around align-items-center">
         <!-- ITERATION ??? -->
+        {% for article in bestsellers() %}
         <div class="card col-10 col-md-5 col-xl-2">
-            <img src="{{ asset('build/images/vin.jpg') }}" class="card-img-top" alt="..." />
+            <img src="{{ asset('build/images/vin.jpg') }}" class="card-img-top" alt="article bestseller" />
             <div class="card-body">
+                <h3 class="card-text">{{ article.title }}</h3>
                 <p class="card-text">
-                NOM DU PRODUIT <br> Lorem ipsum dolor sit amet.
+                    {{ article.region }}
+                    <br>
                 </p>
+                <div class="DivArticlePrice d-flex flex-row">
+                    <a class="btn btn-sm btnUser InputAdd2Kart" href="{{ path('kart_add', {'id': article.id}) }}"><i class="ri-shopping-basket-line"></i>  Ajouter au panier</a>
+                    <div class="d-flex flex-column">
+                        <span class="card--Price">{{ article.price }} €</span>
+                        <div class="DivLinearGradientHorizontal"></div>
+                    </div>
+                </div>
             </div>
         </div>
-        //
-        <div class="card col-10 col-md-5 col-xl-2">
-            <img src="{{ asset('build/images/vin.jpg') }}" class="card-img-top" alt="..." />
-            <div class="card-body">
-                <p class="card-text">
-                NOM DU PRODUIT <br> Lorem ipsum dolor sit amet.
-                </p>
-            </div>
-        </div>
-        //
-        <div class="card col-10 col-md-5 col-xl-2">
-            <img src="{{ asset('build/images/vin.jpg') }}" class="card-img-top" alt="..." />
-            <div class="card-body">
-                <p class="card-text">
-                NOM DU PRODUIT <br> Lorem ipsum dolor sit amet.
-                </p>
-            </div>
-        </div>
-        //
-        <div class="card col-10 col-md-5 col-xl-2">
-            <img src="{{ asset('build/images/vin.jpg') }}" class="card-img-top" alt="..." />
-            <div class="card-body">
-                <p class="card-text">
-                    NOM DU PRODUIT <br> Lorem ipsum dolor sit amet..
-                </p>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 
 {% endblock %}

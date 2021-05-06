@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Category;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Utils\DBTools;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,13 +19,31 @@ class ArticleController extends AbstractController
 {
 
     /**
-     * @Route("/catalog/{id}", name="catalog", methods={"GET"})
+     * Route("/category/{id}", name="region", methods={"GET"})
+     * @Route("/region/{region}", name="region")
      */
-    public function catalog(ArticleRepository $articleRepository, Category $category): Response
+    public function region($region): Response
     {
-        // dd()
-        return $this->render('article/catalog.html.twig', [
-            'articles'  => $articleRepository->findAll(),
+        $obPDO = new DBTools;
+        $obPDO->init();
+        $kartId=$obPDO->execSqlQuery("select * from article where region='".$region."'");
+        //
+        return $this->render('article/category.html.twig',
+            ['articles'  => $kartId,]
+        );
+    }
+    /**
+     * @Route("/category/{id}", name="category", methods={"GET"})
+     */
+    public function category(ArticleRepository $articleRepository, Category $category): Response
+    {
+        $obPDO = new DBTools;
+        $obPDO->init();
+        $articles=$obPDO->execSqlQuery("select * from article");//$articleRepository->findAll(),
+        // dd($articles);
+        return $this->render('article/category.html.twig', [
+            'articles'  => $articles,
+            // 'articles'  => $articleRepository->findAll(),
             'category'  => $category,
         ]);
     }
@@ -61,10 +80,10 @@ class ArticleController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
             $entityManager->flush();
-
+            //
             return $this->redirectToRoute('article_index');
         }
-
+        //
         return $this->render('article/new.html.twig', [
             'article'   => $article,
             'form'      => $form->createView(),

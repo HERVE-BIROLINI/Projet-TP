@@ -12,7 +12,9 @@ class CatalogExtension extends AbstractExtension
     public function getFunctions(){
         return [
             new TwigFunction('getcategories', [$this, 'getAllCategories']),
-            new TwigFunction('getregions', [$this, 'getAllRegions'])
+            new TwigFunction('isusedcategory', [$this, 'isUsedCategory']),
+            new TwigFunction('getregions', [$this, 'getAllRegions']),
+            new TwigFunction('bestsellers', [$this, 'getBestSellers']),
         ];
     }
 
@@ -22,10 +24,25 @@ class CatalogExtension extends AbstractExtension
         $categories=$obPDO->execSqlQuery("select * from category");
         return $categories;
     }
+    public function isUsedCategory($category): bool{
+        $obPDO = new DBTools;
+        $obPDO->init();
+        $articles=$obPDO->execSqlQuery("select * from article where category_id=".$category);
+        if(count($articles)>0){
+            return true;
+        }
+        else{return false;}
+    }
     public function getAllRegions(){
         $obPDO = new DBTools;
         $obPDO->init();
         $regions=$obPDO->execSqlQuery("select distinct region from article");
+        return ($regions);
+    }
+    public function getBestSellers(){
+        $obPDO = new DBTools;
+        $obPDO->init();
+        $regions=$obPDO->execSqlQuery("select * from article where bestseller=1");
         return ($regions);
     }
 

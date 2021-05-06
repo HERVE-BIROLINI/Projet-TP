@@ -92,6 +92,7 @@ class RegistrationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+            $this->addFlash('change-account',"Vos modifications ont bien été prises en compte...");
         }
 
         return $this->render('registration/account.html.twig', [
@@ -143,6 +144,8 @@ class RegistrationController extends AbstractController
                 $form = $this->createForm(AccountFormType::class, $user);
                 $form->handleRequest($request);
 
+                
+            $this->addFlash('change-account',"Votre mot de passe a bien été modifié...");
                 return $this->render('registration/account.html.twig',[
                     'registrationForm'  => $form->createView(),
                     ]

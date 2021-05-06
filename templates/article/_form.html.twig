@@ -30,11 +30,16 @@
   {{ form_widget(form.Score) }}
   {{ form_help(form.Score) }}
   {{ form_errors(form.Score) }}
-<br>
+  <br>
   {{ form_label(form.Category) }}
   {{ form_widget(form.Category) }}
   {{ form_help(form.Category) }}
   {{ form_errors(form.Category) }}
+  <br>
+  {{ form_label(form.Bestseller) }}
+  {{ form_widget(form.Bestseller) }}
+  {{ form_help(form.Bestseller) }}
+  {{ form_errors(form.Bestseller) }}
 <br>
   <button class="btn btnUserReverse">{{ button_label|default('Sauver') }}</button>
   {{ form_end(form) }}

@@ -7,9 +7,9 @@
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    {#{% if error %}#}
+        <!-- <div class="alert alert-danger">{#{{ error.messageKey|trans(error.messageData, 'security') }}#}</div> -->
+        {#{% endif %}#}
     
     {% if app.user %}
         <div class="mb-3">
@@ -17,7 +17,7 @@
         </div>
     {% endif %}
     {% if errPwd is not null %}
-        <div class="alert" role="alert">   
+        <div class="alert alert-danger" role="alert">   
             {{ errPwd }}
         </div>
     {% endif %}

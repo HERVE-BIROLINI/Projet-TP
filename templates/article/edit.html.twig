@@ -4,13 +4,16 @@
 
 {% block body %}
 <div class="container pt-5" id="BigBody">
-    <h1>Edit Article</h1>
+    <div class="bouton">
+        <h1>Modifier Article</h1>
+        {{ include('article/_delete_form.html.twig') }}
+    </div>
 
     {{ include('article/_form.html.twig', {'button_label': 'Mise à jour'}) }}
 
-    <a href="{{ path('article_index') }}">back to list</a>
+    <a class="btn btn-sm btn-secondary btn-return" href="{{ path('article_index') }}">Retour à la liste</a>
 
-    {{ include('article/_delete_form.html.twig') }}
+    
 
 </div>
 {% endblock %}

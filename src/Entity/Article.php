@@ -70,6 +70,11 @@ class Article
      */
     private $kartItems;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $bestseller;
+
     public function __construct()
     {
         $this->kartItems = new ArrayCollection();
@@ -247,6 +252,18 @@ class Article
                 $kartItem->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBestseller(): ?bool
+    {
+        return $this->bestseller;
+    }
+
+    public function setBestseller(?bool $bestseller): self
+    {
+        $this->bestseller = $bestseller;
 
         return $this;
     }

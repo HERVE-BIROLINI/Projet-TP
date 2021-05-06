@@ -1,5 +1,10 @@
 
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_label(form.label) }}
+    {{ form_widget(form.label) }}
+    {{ form_help(form.label) }}
+    {{ form_errors(form.label) }}
+    <!-- {#{{ form_widget(form) }}#} -->
+    <br>
     <button class="btn btnUserReverse">{{ button_label|default('Sauver') }}</button>
 {{ form_end(form) }}

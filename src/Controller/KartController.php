@@ -43,6 +43,8 @@ class KartController extends AbstractController
         }
         // onsauvegarder dans la session
         $session->set('kart',$kart);
+        
+        $this->addFlash('adding_to_cart',"Article deposé dans le panier...");
         return $this->redirect($request->headers->get('referer'));
         // return $this->redirectToRoute('kart_user');
     }
@@ -117,7 +119,6 @@ class KartController extends AbstractController
                 $total+=$article->getPrice()*$quantity;
             }
             return $this->render('kart/userkart.html.twig', [
-                // 'registrationForm' => $form->createView(),
                 'kartItems' => $kartItems,
                 'total'     => $total,
             ]);
@@ -125,17 +126,11 @@ class KartController extends AbstractController
         // Retour dans la méthode : $_POST['validKart']='ok'
         else{
             $kart=$session->get('kart',[]);
-            // $kart= new Kart;
-            // $qb = $this->createQueryBuilder('s');
-            // $qb->select('article.*,kart_item.quantity from article')
-            //     ->innerJoin('kart_item', 'ki', 'article.id=kart_item.article_id')
-            //     ->innerJoin('kart', 'k', 'kart.id=kart_item.kart_id')
-            //     ->where('kart', 'k', 'kart.id=kart_item.kart_id')
             $user=$this->getUser();
             $obPDO = new DBTools;
             $obPDO->init();
             $curDateTime=new DateTime();
-            // écrire dans les tables.....
+            // écrire dans les tables...
             // ... en commençant par le kart
             $obPDO->execSqlQuery(
                 "insert into kart (user_id, creationdate, status) values (?,?,?);"
@@ -149,15 +144,6 @@ class KartController extends AbstractController
                     ,array(intval($kartId),intval($id),intval($quantity))
                 );
             }
-            // $obPDO->execSqlQuery(
-            //     "select article.*,kart_item.quantity from article"
-            //     ."inner join kart_item on article.id=kart_item.article_id"
-            //     ."inner join kart on kart.id=kart_item.kart_id"
-            //     ."inner join user on user.id=kart.id"
-            //     ."WHERE user.id=".$user->getId()
-            //     ."and kart.status=0"
-            // );
-
             // supprime le panier, retourne à l'affichage
             $session->remove('kart');
             return $this->redirectToRoute('kart_user');
@@ -166,15 +152,14 @@ class KartController extends AbstractController
 
     /**
      * 
-     * @Route("/history", name="history")
+     * @Route("/history", name="history", methods={"GET","POST"})
      */
     public function orderHistory(KartRepository $kartRepository
                                 , KartItemRepository $kartitemRepository
+                                ,ArticleRepository $articleRepository
                                 // ,SessionInterface $session
-                                // ,ArticleRepository $articleRepository
                                 ): Response
     {
-
         $user=$this->getUser();
         // $orders=$kartRepository->findAll();
         $karts=$kartRepository->findBy(['user'=>$user]);
@@ -184,68 +169,45 @@ class KartController extends AbstractController
         $totalprice=0;
         // pour chaque commande...
         foreach($karts as $kart){
+            $totalarticles=0;
+            $totalprice=0;
             $kartitems=$kartitemRepository->findBy(['kart'=>$kart]);
             // ... somme des totaux de chaque article, et somme des prix
             foreach($kartitems as $kartitem){
                 $totalarticles+=$kartitem->getQuantity();
                 $totalprice+=$kartitem->getQuantity()*$kartitem
-                                ->getArticle()->getPrice();
+                    ->getArticle()->getPrice();
             }
-            array_push($totals,[
-                'totalarticles' => $totalarticles,
-                'totalprice'    => $totalprice
-            ]);
+            $totals[$kart->getId()]=
+                [
+                    'totalarticles' => $totalarticles,
+                    'totalprice'    => $totalprice
+                ];
         }
-
-dd($totalprice);
-        // Entrée dans la méthode
-        if(!isset($_POST['view'])){
+        // 1/ Entrée dans la méthode, ou retour à la vue "liste"...
+        if(!isset($_POST['view']) or $_POST['view']=='list'){
             // dd($orders);
             return $this->render('kart/orderhistory.html.twig', [
+                'view'      => 'list',
                 'orders'    => $karts,
                 'totals'    => $totals,
             ]);
         }
-        // // Retour dans la méthode : $_POST['validKart']='ok'
+        // 2/ Retour dans la méthode : $_POST['view']='kart_id'
         else{
-        //     $kart=$session->get('kart',[]);
-        //     // $kart= new Kart;
-        //     // $qb = $this->createQueryBuilder('s');
-        //     // $qb->select('article.*,kart_item.quantity from article')
-        //     //     ->innerJoin('kart_item', 'ki', 'article.id=kart_item.article_id')
-        //     //     ->innerJoin('kart', 'k', 'kart.id=kart_item.kart_id')
-        //     //     ->where('kart', 'k', 'kart.id=kart_item.kart_id')
-        //     $user=$this->getUser();
-        //     $obPDO = new DBTools;
-        //     $obPDO->init();
-        //     $curDateTime=new DateTime();
-        //     // écrire dans les tables.....
-        //     // ... en commençant par le kart
-        //     $obPDO->execSqlQuery(
-        //         "insert into kart (user_id, creationdate, status) values (?,?,?);"
-        //         ,array($user->getId(),$curDateTime->format('Y-m-d H:i:s'), 1)
-        //     );
-        //     $kartId=$obPDO->execSqlQuery("select max(id) from kart")[0][0];
-        //     // ... puis les kart_articles
-        //     foreach($kart as $id => $quantity){
-        //         $obPDO->execSqlQuery(
-        //             "insert into kart_item (kart_id, article_id, quantity) values (?,?,?);"
-        //             ,array(intval($kartId),intval($id),intval($quantity))
-        //         );
-        //     }
-        //     // $obPDO->execSqlQuery(
-        //     //     "select article.*,kart_item.quantity from article"
-        //     //     ."inner join kart_item on article.id=kart_item.article_id"
-        //     //     ."inner join kart on kart.id=kart_item.kart_id"
-        //     //     ."inner join user on user.id=kart.id"
-        //     //     ."WHERE user.id=".$user->getId()
-        //     //     ."and kart.status=0"
-        //     // );
-
-        //     // supprime le panier, retourne à l'affichage
-        //     $session->remove('kart');
-dd($orders);
-            return $this->redirectToRoute('kart_user');
+            $obPDO = new DBTools;
+            $obPDO->init();
+            $kartItems=$obPDO->execSqlQuery(
+                "select article.*,kart_item.quantity from article "
+                ."inner join kart_item on article.id=kart_item.article_id "
+                ."inner join kart on kart.id=kart_item.kart_id "
+                ."WHERE kart.id=".$_POST['view']
+            );
+            //
+            return $this->render('kart/orderhistory.html.twig', [
+                'view'      => 'details',
+                'kartItems' => $kartItems,
+            ]);
         }
     }
 
@@ -260,10 +222,6 @@ dd($orders);
     //         'controller_name' => 'KartController',
     //     ]);
     // }
-
-
-
-
 
 
     //     public function monPanier(KartRepository $kartRepository){
