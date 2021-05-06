@@ -11,6 +11,11 @@ footer{
 .card-footer{
     background-color: rgb(253, 191, 21, 0.836);
     box-shadow: inset 2px 2px 2px rgb(83, 22, 22);
+    height:75px;
+}
+.card--body{
+    background-color: wheat;
+    height:150px;
 }
 .banner{
     justify-content:center;
@@ -31,7 +36,7 @@ footer{
     z-index:9;
 }
 body{
-    flex-grow:1;
+    /* flex-grow:1; */
     padding-top:30px;
     background: rgb(83, 22, 22);
 }
@@ -79,6 +84,7 @@ h1,.table--TxtLight,.LifeLine{
 .btnUser{
     background-color: rgb(83, 22, 22);
     color:rgba(253, 191, 21, 0.836);
+    overflow:hidden;
 }
 .btnUser:hover{
     background-color: rgba(253, 191, 21, 0.836);
@@ -114,10 +120,15 @@ h1,.table--TxtLight,.LifeLine{
 
 /* L'ELEMENT "CARTE" (et ses enfants) DE LA PAGE CATALOG */
 .card-group{
-    /* border:2px solid red; */
+    display: flex;
     flex-wrap:wrap;
+    justify-content: space-evenly;
 }
 .card--article{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
     padding:10px;
     background-color: wheat;
     color:rgb(83, 22, 22);
@@ -125,17 +136,16 @@ h1,.table--TxtLight,.LifeLine{
     box-shadow:5px 5px 10px rgba(253, 191, 21, 0.836);/* inset; */
     justify-content:flex-end;
 }
-/* .card-deck{ */
-    /* margin:0.1rem; */
-    /* border:2px solid green; */
-    /* align-items:center; */
-/* } */
-/* .card--column{ */
-    /* border:2px solid yellow; */
-    /* align-items:center; */
-/* } */
+.card--column{
+    overflow: hidden;
+    margin:10px;
+}
 .card--img{
-    height:200px;
+    height:15rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
 }
 .card--Price{
     font-size: 1.2em;

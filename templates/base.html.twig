@@ -45,14 +45,14 @@
                                 </a>
                                 <div class="dropdown-menu" ><!-- aria-labelledby="navbarDropdown"> -->
                                     <!-- -->
-                                    <span style="padding:0 0 0 10px;font-style:italic" disabled>Par catégorie :</span>
+                                    <span style="padding:0 0 0 10px;font-style:italic" disabled><b>Par catégorie :</b></span>
                                     <div class="dropdown-divider"></div>
                                     {% for category in getcategories() %}
                                     <a class="dropdown-item" href="{{ path('article_category', {'id': category.id}) }}">{{ category.label }}</a>
                                     {% endfor %}
                                     <!-- -->
                                     <div class="dropdown-divider"></div>
-                                    <span style="padding:0 0 0 10px;font-style:italic" disabled>Par région :</span>
+                                    <span style="padding:0 0 0 10px;font-style:italic" disabled><b>Par région :</b></span>
                                     <div class="dropdown-divider"></div>
                                     <!-- {{ dump(getregions()) }} -->
                                     {% for region in getregions() %}

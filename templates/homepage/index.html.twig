@@ -50,23 +50,25 @@
 
     <p class="section-texte">BEST SELLERS</p>
 
-    <div class="cardbox d-flex flex-row flex-wrap justify-content-around align-items-center">
+    <div class=" d-flex flex-row flex-wrap justify-content-around align-items-center">
         <!-- ITERATION ??? -->
         {% for article in bestsellers() %}
-        <div class="card col-10 col-md-5 col-xl-2">
-            <img src="{{ asset('build/images/vin.jpg') }}" class="card-img-top" alt="article bestseller" />
+        <div class="card col-10 col-md-5 col-xl-3 card--column">
+            <img src="{{ asset('build/images/'~getimages(article['id'])[0]['pathname']) }}" class="card--img" alt="photo de l'article">
+                
+            <!-- <img src="{#{{ asset('build/images/vin.jpg') }}#}" class="card-img-top" alt="article bestseller" /> -->
             <div class="card-body">
                 <h3 class="card-text">{{ article.title }}</h3>
                 <p class="card-text">
                     {{ article.region }}
                     <br>
                 </p>
-                <div class="DivArticlePrice d-flex flex-row">
-                    <a class="btn btn-sm btnUser InputAdd2Kart" href="{{ path('kart_add', {'id': article.id}) }}"><i class="ri-shopping-basket-line"></i>  Ajouter au panier</a>
-                    <div class="d-flex flex-column">
-                        <span class="card--Price">{{ article.price }} €</span>
-                        <div class="DivLinearGradientHorizontal"></div>
-                    </div>
+            </div>
+            <div class="DivArticlePrice d-flex flex-row card-footer">
+                <a class="btn btn-sm btnUser InputAdd2Kart" href="{{ path('kart_add', {'id': article.id}) }}"><i class="ri-shopping-basket-line"></i>  Ajouter au panier</a>
+                <div class="d-flex flex-column">
+                    <span class="card--Price">{{ article.price }}€</span>
+                    <div class="DivLinearGradientHorizontal"></div>
                 </div>
             </div>
         </div>

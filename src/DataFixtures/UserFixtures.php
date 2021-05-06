@@ -8,7 +8,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserFixtures extends Fixture implements OrderedFixtureInterface{
+class UserFixtures{ // extends Fixture implements OrderedFixtureInterface{
 
     const USERS = [
         ['email'            => "birolini.herve@gmail.com",
@@ -38,7 +38,7 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface{
 
 // Pour déclencher LOAD à partir du Terminal
 // bin/console doctrine:fixtures:load
-    public function load(ObjectManager $manager){
+    public function _load(ObjectManager $manager){
         foreach (self::USERS as $Item) {
             $obUser = new User(
                 // ex : mauvaise méthode :
@@ -80,7 +80,7 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface{
      *
      * @return integer
      */
-    public function getOrder(): int{
+    public function _getOrder(): int{
         return 2;
     }
 }

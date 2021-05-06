@@ -17,7 +17,7 @@ class CategoryFixtures extends Fixture implements OrderedFixtureInterface{
         ],
         [
             // 'key' => "mer",
-            'label'    => "Produit de la mer"
+            'label'    => "Produits de la mer"
         ],
         [
             // 'key' => "mer",

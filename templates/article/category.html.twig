@@ -11,26 +11,22 @@
 {% endfor %}
 
 <!-- Fil conducteur -->
-<div class="mt-5 pt-5"></div>{#<p class="mt-5 ml-2"><a href="{{ path('homepage') }}">Accueil</a>#}
+<div class="mt-5 pt-5"></div>
 <h2 class="ml-5">Votre sélection de produits</h2>
 
-<div class="container-fluid" id="BigBody">
+<!--<div class="container-fluid" id="BigBody" >-->
 
-    <!-- col-10 col-md-6 col-xl-3 -->
-    <div class="d-flex flex-row card-group justify-content-around">
+    <div class="card-group">
         
         <!-- /* Colonne Présentation article */ -->
-        
         {% for article in articles %}
             {% if category is not defined or article['category_id'] == category.id %}
-        <Form class="d-flex flex-column card-deck" action="" target="_blank">
+        <Form class="d-flex flex-column col-10 col-md-6 col-lg-4 col-xl-3" action="" target="_blank">
             <!-- /* Colonne Image + Titre */ -->
             <div class="card card--column">
-
-                <img src="" class="card-img-top card--img" alt="...">
-                <!-- <img src="{#{{ article.image }}#}" class="card-img-top card--img" alt="..."> -->
+                <img src="{{ asset('build/images/'~getimages(article['id'])[0]['pathname']) }}" class="card--img" alt="photo de l'article">
                 
-                <div class="card-body">
+                <div class="card--body">
                     <h4 class="card-title">{{ article.title }}</h4>
                     <h6 class="card-title">{{ article.region }}</h6>
                     <p class="card-text">{{ article.score }}</p>
@@ -43,34 +39,18 @@
                     <div class="DivArticlePriceColumn">
                         <div class="DivArticlePrice d-flex flex-row">
                             <!-- <span class="card--PriceOld">{#{{ article.price }}#}€</span> -->
-                            <span class="card--Price">{{ article.price }} €</span>
+                            <span class="card--Price">{{ article.price }}€</span>
                         </div>
                         <div class="DivLinearGradientHorizontal"></div>
                     </div>
                     <!-- <small class="text-muted">Last updated 3 mins ago</small> -->
                 </div>
             </div>
-            <!-- <div class="DivPercentageReduceTag"><p>-30%</p></div>
-            <div class="DivArticleCard Column">
-                <img src="./src/gant-boxe-1.png" alt="Gloves"/>
-                <p>GANTS DE BOXE COMBAT KLIMAX V3</p>
-            </div>
-            /* Rangée Fiche + Prix */
-            <div class="DivArticleDetails Row">
-                <input type="submit" value="Voir la vente" class="InputArticleCard"/>
-                <div class="DivArticlePriceColumn">
-                    <div class="DivArticlePrice Row">
-                        <span class="SpanPriceOld">120€</span>
-                        <span class="SpanPriceNew">65€</span>
-                    </div>
-                    <div class="DivLinearGradientHorizontal"></div>
-                </div>
-            </div> -->
         </Form>
             {% endif %}
         {% endfor %}
 
     </div>
 
-</div>
+<!-- </div> -->
 {% endblock %}

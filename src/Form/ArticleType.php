@@ -43,8 +43,8 @@ class ArticleType extends AbstractType
                 'required'      =>  true,
             ])
             ->add('Score', TextType::class,[
-                'label'         =>  "Région",
-                'attr'          =>  ['placeholder'=>"Provenance de l'article"],
+                'label'         =>  "Score",
+                'attr'          =>  ['placeholder'=>"Note d'appréciation sur 5"],
                 'required'      =>  true,
             ])
             ->add('Category',EntityType::class,[

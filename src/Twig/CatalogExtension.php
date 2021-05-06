@@ -15,6 +15,8 @@ class CatalogExtension extends AbstractExtension
             new TwigFunction('isusedcategory', [$this, 'isUsedCategory']),
             new TwigFunction('getregions', [$this, 'getAllRegions']),
             new TwigFunction('bestsellers', [$this, 'getBestSellers']),
+            new TwigFunction('getimages', [$this, 'getImages']),
+            
         ];
     }
 
@@ -43,6 +45,13 @@ class CatalogExtension extends AbstractExtension
         $obPDO = new DBTools;
         $obPDO->init();
         $regions=$obPDO->execSqlQuery("select * from article where bestseller=1");
+        return ($regions);
+    }
+    public function getImages(string $article){
+        $obPDO = new DBTools;
+        $obPDO->init();
+        $article=intval($article);
+        $regions=$obPDO->execSqlQuery("select pathname from picture where article_id=".$article);
         return ($regions);
     }
 
