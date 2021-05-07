@@ -58,7 +58,6 @@
         {% for article in bestsellers() %}
         <div class="card col-10 col-md-5 col-xl-3 card--column">
             <img src="{{ asset('build/images/'~getimages(article['id'])[0]['pathname']) }}" class="card--img" alt="photo de l'article">
-                
             <!-- <img src="{#{{ asset('build/images/vin.jpg') }}#}" class="card-img-top" alt="article bestseller" /> -->
             <div class="card-body">
                 <h3 class="card-text">{{ article.title }}</h3>

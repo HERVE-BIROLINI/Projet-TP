@@ -52,6 +52,10 @@ class CatalogExtension extends AbstractExtension
         $obPDO->init();
         $article=intval($article);
         $regions=$obPDO->execSqlQuery("select pathname from picture where article_id=".$article);
+        // dd($regions);
+        if(!isset($regions[0])){
+            $regions=array(['pathname'=>'no-image.png']);
+        }
         return ($regions);
     }
 
