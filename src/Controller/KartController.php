@@ -44,7 +44,7 @@ class KartController extends AbstractController
         // onsauvegarder dans la session
         $session->set('kart',$kart);
         
-        $this->addFlash('adding_to_cart',"Article deposé dans le panier...");
+        $this->addFlash('adding_to_cart',"Article ajouté au panier...");
         return $this->redirect($request->headers->get('referer'));
         // return $this->redirectToRoute('kart_user');
     }
@@ -64,8 +64,9 @@ class KartController extends AbstractController
                 unset($kart[$article->getId()]);
             }
         }
-        // onsauvegarder dans la session
+        // on sauvegarde dans la session
         $session->set('kart',$kart);
+        $this->addFlash('deleting_from_cart',"Article supprimé du panier...");
         return $this->redirectToRoute('kart_user');
     }
     /**
@@ -82,6 +83,8 @@ class KartController extends AbstractController
         }
         // on sauvegarde dans la session
         $session->set('kart', $kart);
+        $this->addFlash('deleting_from_cart',"Article(s) supprimé(s) du panier...");
+        // return $this->redirect($request->headers->get('referer'));
         return $this->redirectToRoute('kart_user');
     }
     /**
@@ -90,6 +93,7 @@ class KartController extends AbstractController
      */
     public function deleteAll(SessionInterface $session){
         $session->remove('kart');
+        $this->addFlash('deleting_from_cart',"Panier vidé...");
         return $this->redirectToRoute('kart_user');
     }
 

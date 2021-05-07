@@ -140,6 +140,13 @@ h1,.table--TxtLight,.LifeLine{
     overflow: hidden;
     margin:10px;
 }
+.img--tiny{
+    height:2rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+}
 .card--img{
     height:15rem;
     background-repeat: no-repeat;

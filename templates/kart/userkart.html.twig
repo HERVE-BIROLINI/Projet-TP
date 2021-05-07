@@ -3,9 +3,12 @@
 {% block title %}Mon Compte{% endblock %}
 
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
+{% for flashError in app.flashes('adding_to_cart') %}
+    <div class="alert alert-success" role="alert">{{ flashError }}</div>
+{% endfor %}
+{% for flashError in app.flashes('deleting_from_cart') %}
+    <div class="alert alert-warning" role="alert">{{ flashError }}</div>
+{% endfor %}
 <!-- <div class="container-fluid"> -->
     <!--debut barre a gaucher--> 
     <form class="py-5 my-5" method="post">
@@ -46,7 +49,7 @@
                                         <td>{{ item['article'].Title }}</td>
                                         <td>{{ item.article.Capacity }}</td>
                                         <td class="text-right">{{ item.article.Price }}€</td>
-                                        <td>Photo</td>
+                                        <td><img src="{{ asset('build/images/'~getimages(item.article.id)[0]['pathname']) }}" class="img--tiny" alt="photo de l'article"></td>
                                         <td>
                                             <div class="divnowrap--cart">
                                                 <a class="btn btn-sm" href="{{ path('kart_remove', {id: item.article.id}) }}">

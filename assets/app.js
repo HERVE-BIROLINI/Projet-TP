@@ -18,5 +18,5 @@ import 'bootstrap';
 
 // Carousel page d'accueil
 $('.carousel').carousel({
-    interval: 2500
+    interval: 1500
 });

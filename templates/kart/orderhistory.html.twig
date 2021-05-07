@@ -90,7 +90,7 @@
                                     <td>{{ item['title'] }}</td>
                                     <td>{{ item['capacity'] }}</td>
                                     <td>{{ item['price'] }}</td>
-                                    <td>photo</td>
+                                    <td><img src="{{ asset('build/images/'~getimages(item['id'])[0]['pathname']) }}" class="img--tiny" alt="photo de l'article"></td>
                                     <td>{{ item['quantity'] }}</td>
                                     <td>{{ item['price'] * item['quantity'] }}</td>
                                     <td></td>
